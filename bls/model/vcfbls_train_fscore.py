@@ -70,7 +70,8 @@ def kerf(matrix):
 
 
 def vcfbls_train_fscore(train_x, train_y, test_x, test_y,
-                        s, C, N1, N2, N3, N1_bls_fsm1, N2_bls_fsm1, N1_bls_fsm2, N2_bls_fsm2,
+                        s, C, N1, N2, N3,
+                        N1_bls_fsm1, N2_bls_fsm1, N1_bls_fsm2, N2_bls_fsm2,
                         add_nfeature1, add_nfeature2):
     """
     Function that creates the VCFBLS model

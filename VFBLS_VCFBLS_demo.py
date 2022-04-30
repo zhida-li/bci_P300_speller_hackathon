@@ -14,9 +14,9 @@
 """
 
 # ==============================================
-# VFBLS real-time detection high-level module
+# VFBLS and VCFBLS
 # ==============================================
-# Last modified: Feb. 27, 2022
+# Last modified: Apr. 30, 2022
 
 # Import the built-in libraries
 import os
@@ -90,13 +90,13 @@ s = 0.6  # the shrinkage parameter for enhancement nodes
 # N3* - the number of enhancement nodes
 
 N1_bls_fsm = 100  # feature nodes of a group in the 1st set
-N2_bls_fsm = 10  # feature group in the 1st set
+N2_bls_fsm = 10  # feature groups in the 1st set
 
 N1_bls_fsm1 = 20  # feature nodes of a group in the 2nd set
-N2_bls_fsm1 = 10  # feature group in the 3rd set
+N2_bls_fsm1 = 10  # feature groups in the 3rd set
 
 N1_bls_fsm2 = 20  # feature nodes of a group in the 3rd set
-N2_bls_fsm2 = 10  # feature group in the 3rd set
+N2_bls_fsm2 = 10  # feature groups in the 3rd set
 
 N3_bls_fsm = 200  # enhancement nodes
 
