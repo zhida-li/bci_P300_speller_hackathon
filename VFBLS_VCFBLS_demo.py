@@ -128,9 +128,9 @@ blsfsm_test_f_score = f_score
 blsfsm_train_time = Training_time
 blsfsm_test_time = Testing_time
 
-result = ['VFBLS', str(blsfsm_test_acc), str(blsfsm_test_f_score), str(blsfsm_train_time)]
+result = ['VFBLS', str(blsfsm_test_acc*100), str(blsfsm_test_f_score*100), str(blsfsm_train_time)]
 result = np.asarray(result)
-print('VFBLS results:', result)
+print('VFBLS results -Accuracy (%), F-Score (%), Training time (s)-:', result)
 # np.savetxt('finalResult_VFBLS.csv', result, delimiter=',', fmt='%s')
 
 ##
@@ -154,7 +154,7 @@ blsfsm_test_f_score = f_score
 blsfsm_train_time = Training_time
 blsfsm_test_time = Testing_time
 
-result = ['VCFBLS', str(blsfsm_test_acc), str(blsfsm_test_f_score), str(blsfsm_train_time)]
+result = ['VCFBLS', str(blsfsm_test_acc*100), str(blsfsm_test_f_score*100), str(blsfsm_train_time)]
 result = np.asarray(result)
-print('VCFBLS results:', result)
+print('VCFBLS results -Accuracy (%), F-Score (%), Training time (s)-:', result)
 # np.savetxt('finalResult_VCFBLS.csv', result, delimiter=',', fmt='%s')
