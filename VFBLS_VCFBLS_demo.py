@@ -1,11 +1,10 @@
 """
-    @author Zhida Li
+    @authors Zhida Li, Ana Laura Gonzalez Rios
     @email zhidal@sfu.ca
     @date Feb. 19, 2022
     @version: 1.1.0
     @description:
-                This module contains the vfbls function
-                for loading data and prediction.
+                This module contains implementation VFBLS and VCFBLS with datasets.
 
     @copyright Copyright (c) Feb. 19, 2022
         All Rights Reserved
@@ -51,7 +50,7 @@ def enablePrint():
 
 # blockPrint()
 
-
+# ============================================== may edit --begin
 # Load the datasets
 train_dataset = np.loadtxt("./slammer_64_train.csv", delimiter=",")
 test_dataset = np.loadtxt("./slammer_64_test.csv", delimiter=",")
@@ -102,7 +101,7 @@ N3_bls_fsm = 200  # enhancement nodes
 
 add_nFeature1 = 6  # no. of top relevant features in the 2nd set
 add_nFeature2 = 4  # no. of top relevant features in the 3rd set
-#######################
+# ============================================== may edit --end
 
 train_err = np.zeros((1, epochs))
 test_err = np.zeros((1, epochs))
