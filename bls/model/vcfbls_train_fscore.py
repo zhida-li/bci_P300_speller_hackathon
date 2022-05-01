@@ -424,4 +424,4 @@ def vcfbls_train_fscore(train_x, train_y, test_x, test_y,
     print("Testing Accuracy is : ", TestingAccuracy * 100, " %");
     print("Testing F-Score is : ", f_score * 100, " %");
 
-    return TrainingAccuracy, TestingAccuracy, Training_time, Testing_time, f_score;
+    return TrainingAccuracy, TestingAccuracy, Training_time, Testing_time, f_score, predicted
