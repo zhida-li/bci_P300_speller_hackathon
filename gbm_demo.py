@@ -60,7 +60,7 @@ num_estimators = [150, 150, 150]  # need to be updated
 learn_rate = [0.02, 0.02, 0.02]  # need to be updated
 
 dataset = 'p300'  # need to be updated
-algo_gbm = 'catboost'  # xgboost, lightgbm, catboost
+algo_gbm = 'lightgbm'  # xgboost, lightgbm, catboost
 # dataset_exp_test = ['powerOutage_pk_ripe', 'powerOutage_pk_routeviews',
 #                     'ransomware_westRock_ripe', 'ransomware_westRock_routeviews']
 
