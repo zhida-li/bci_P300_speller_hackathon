@@ -1,6 +1,6 @@
 # Repository for P300 Speller Data Analysis
 
-Event: [VIRTUAL BR41N.IO HACKATHON]([Spring School 2022 - BR41N.IO](https://www.br41n.io/Spring-School-2022))
+Event: [VIRTUAL BR41N.IO HACKATHON](https://www.br41n.io/Spring-School-2022)
 
 Date and time: Spring School 2022, April 30 - May 1, 2022 
 
