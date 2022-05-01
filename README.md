@@ -1,8 +1,12 @@
 # bci_P300_speller_hackathon
 Hackathon Spring2022 P300 Speller
 
-## install the external Python libraries by running:
+## Install the external Python libraries by running:
+```bash
 > pip install -r requirements.txt
+```
 
-## main file
+## Run the main file
+```bash
 > python VFBLS_VCFBLS_demo.py
+```
