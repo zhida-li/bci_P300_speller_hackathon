@@ -4,11 +4,21 @@ import numpy as np
 VFBLS or VCFBLS
 """
 
-algo = 'VCFBLS'  # 'VFBLS' or 'VCFBLS'
+algo = 'VFBLS'  # 'VFBLS' or 'VCFBLS'
+
+# list1 = [20, 40, 100]
+# list2 = [10, 20]
+# list3 = [50, 100]
+#
+# list11 = [20, 40]
+# list12 = [10]
+#
+# list21 = [10, 20]
+# list22 = [5]
 
 list1 = [20, 40, 100]
 list2 = [10, 20]
-list3 = [50, 100]
+list3 = [50, 100, 200]
 
 list11 = [20, 40]
 list12 = [10]

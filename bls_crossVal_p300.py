@@ -75,8 +75,8 @@ for i in range(1, 6):
     mats.append(scipy.io.loadmat(f'./p300_datasets/S{i}.mat'))
 
 SAMPLING_FREQUENCY = 250
-PRE_SAMPLES = int(-0.1 * SAMPLING_FREQUENCY)  # -0.2
-POST_SAMPLES = int(0.6 * SAMPLING_FREQUENCY)  # 0.4
+PRE_SAMPLES = int(0.1 * SAMPLING_FREQUENCY)  # -0.1
+POST_SAMPLES = int(0.7 * SAMPLING_FREQUENCY)  # 0.6
 
 p_samples = {}
 n_samples = {}
@@ -118,11 +118,11 @@ C = 2 ** -15;
 s = 0.8;
 
 epochs = 1;
-algo = 'VCFBLS'  # 'VFBLS' or 'VCFBLS'
+algo = 'VFBLS'  # 'VFBLS' or 'VCFBLS'
 
 list1 = [20, 40, 100]
 list2 = [10, 20]
-list3 = [50, 100]
+list3 = [50, 100, 200]
 
 list11 = [20, 40]
 list12 = [10]

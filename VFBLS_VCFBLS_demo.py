@@ -72,8 +72,8 @@ for i in range(1, 6):
     mats.append(scipy.io.loadmat(f'./p300_datasets/S{i}.mat'))
 
 SAMPLING_FREQUENCY = 250
-PRE_SAMPLES = int(-0.1 * SAMPLING_FREQUENCY)  # -0.2
-POST_SAMPLES = int(0.6 * SAMPLING_FREQUENCY)  # 0.4
+PRE_SAMPLES = int(0.1 * SAMPLING_FREQUENCY)  # -0.1
+POST_SAMPLES = int(0.7 * SAMPLING_FREQUENCY)  # 0.6
 
 p_samples = {}
 n_samples = {}
@@ -138,10 +138,11 @@ s = 0.8  # the shrinkage parameter for enhancement nodes
 # N2* - the groups of mapped features
 # N3* - the number of enhancement nodes
 
-algo = 'VCFBLS'  # 'VFBLS' or 'VCFBLS'
+algo = 'VFBLS'
+
 if algo == 'VFBLS':
-    N1_bls_fsm = 40  # feature nodes of a group in the 1st set
-    N2_bls_fsm = 10  # feature groups in the 1st set
+    N1_bls_fsm = 100  # feature nodes of a group in the 1st set
+    N2_bls_fsm = 20  # feature groups in the 1st set
     N3_bls_fsm = 50  # enhancement nodes
 
     N1_bls_fsm1 = 20  # feature nodes of a group in the 2nd set
@@ -173,102 +174,104 @@ test_err = np.zeros((1, epochs))
 train_time = np.zeros((1, epochs))
 test_time = np.zeros((1, epochs))
 
-print("================== VFBLS ===========================\n\n")
-np.random.seed(seed)  # set the seed for generating random numbers
-for j in range(0, epochs):
-    TrainingAccuracy, TestingAccuracy, Training_time, Testing_time, f_score, predicted \
-        = vfbls_train_fscore(train_x, train_y, test_x, test_y, s, C,
-                             N1_bls_fsm, N2_bls_fsm, N3_bls_fsm,
-                             N1_bls_fsm1, N2_bls_fsm1,
-                             N1_bls_fsm2, N2_bls_fsm2,
-                             add_nFeature1, add_nFeature2)
+if algo == 'VFBLS':
+    print("================== VFBLS ===========================\n\n")
+    np.random.seed(seed)  # set the seed for generating random numbers
+    for j in range(0, epochs):
+        TrainingAccuracy, TestingAccuracy, Training_time, Testing_time, f_score, predicted \
+            = vfbls_train_fscore(train_x, train_y, test_x, test_y, s, C,
+                                 N1_bls_fsm, N2_bls_fsm, N3_bls_fsm,
+                                 N1_bls_fsm1, N2_bls_fsm1,
+                                 N1_bls_fsm2, N2_bls_fsm2,
+                                 add_nFeature1, add_nFeature2)
 
-    train_err[0, j] = TrainingAccuracy * 100
-    test_err[0, j] = TestingAccuracy * 100
-    train_time[0, j] = Training_time
-    test_time[0, j] = Testing_time
+        train_err[0, j] = TrainingAccuracy * 100
+        test_err[0, j] = TestingAccuracy * 100
+        train_time[0, j] = Training_time
+        test_time[0, j] = Testing_time
 
-blsfsm_test_acc = TestingAccuracy
-blsfsm_test_f_score = f_score
-blsfsm_train_time = Training_time
-blsfsm_test_time = Testing_time
+    blsfsm_test_acc = TestingAccuracy
+    blsfsm_test_f_score = f_score
+    blsfsm_train_time = Training_time
+    blsfsm_test_time = Testing_time
 
-result = ['VFBLS', str(blsfsm_test_acc * 100), str(blsfsm_test_f_score * 100), str(blsfsm_train_time)]
-result = np.asarray(result)
-# print('VFBLS results -Accuracy (%), F-Score (%), Training time (s)-:', result)
-# np.savetxt('finalResult_VFBLS.csv', result, delimiter=',', fmt='%s')
+    result = ['VFBLS', str(blsfsm_test_acc * 100), str(blsfsm_test_f_score * 100), str(blsfsm_train_time)]
+    result = np.asarray(result)
+    # print('VFBLS results -Accuracy (%), F-Score (%), Training time (s)-:', result)
+    # np.savetxt('finalResult_VFBLS.csv', result, delimiter=',', fmt='%s')
 
-accuracy = accuracy_score(test_y, predicted)
-fscore = f1_score(test_y, predicted)
-precision = precision_score(test_y, predicted)
-sensitivity = recall_score(test_y, predicted)
-tp, fn, fp, tn = confusion_matrix_cnl(test_y, predicted)
+    accuracy = accuracy_score(test_y, predicted)
+    fscore = f1_score(test_y, predicted)
+    precision = precision_score(test_y, predicted)
+    sensitivity = recall_score(test_y, predicted)
+    tp, fn, fp, tn = confusion_matrix_cnl(test_y, predicted)
 
-head = ['VFBLS', 'Accuracy', 'F-Score',
-        'Precision', 'Sensitivity', 'TP', 'FN', 'FP', 'TN', 'Training time']
-result_append = ['{}_{}_{}'.format('VFBLS', 'p300', 'none'),
-                 '{:.6f}'.format(accuracy * 100), '{:.6f}'.format(fscore * 100),
-                 '{:.6f}'.format(precision * 100), '{:.6f}'.format(sensitivity * 100),
-                 '{}'.format(tp), '{}'.format(fn), '{}'.format(fp), '{}'.format(tn), '{}'.format(Training_time)]
+    head = ['VFBLS', 'Accuracy', 'F-Score',
+            'Precision', 'Sensitivity', 'TP', 'FN', 'FP', 'TN', 'Training time']
+    result_append = ['{}_{}_{}'.format('VFBLS', 'p300', 'none'),
+                     '{:.6f}'.format(accuracy * 100), '{:.6f}'.format(fscore * 100),
+                     '{:.6f}'.format(precision * 100), '{:.6f}'.format(sensitivity * 100),
+                     '{}'.format(tp), '{}'.format(fn), '{}'.format(fp), '{}'.format(tn), '{}'.format(Training_time)]
 
-result_save = np.asarray(result_append)
-result_save = result_save.reshape((1, len(result_save)))
-head = np.array(head)
-head = head.reshape((1, len(head)))
-result_save = np.concatenate((head, result_save), axis=0)
-# Save final results for each dataset
-np.savetxt('%s_results_%s.csv' % ('VFBLS', 'p300'),
-           result_save, fmt='%s',
-           delimiter=',')
-print('------ Results have been saved to %s_results_%s.csv ------' % ('VFBLS', 'p300'))
+    result_save = np.asarray(result_append)
+    result_save = result_save.reshape((1, len(result_save)))
+    head = np.array(head)
+    head = head.reshape((1, len(head)))
+    result_save = np.concatenate((head, result_save), axis=0)
+    # Save final results for each dataset
+    np.savetxt('%s_results_%s.csv' % ('VFBLS', 'p300'),
+               result_save, fmt='%s',
+               delimiter=',')
+    print('------ Results have been saved to %s_results_%s.csv ------' % ('VFBLS', 'p300'))
 
-##
-print("================== VCFBLS ===========================\n\n")
-np.random.seed(seed)  # set the seed for generating random numbers
-for j in range(0, epochs):
-    TrainingAccuracy, TestingAccuracy, Training_time, Testing_time, f_score, predicted \
-        = vcfbls_train_fscore(train_x, train_y, test_x, test_y, s, C,
-                              N1_bls_fsm, N2_bls_fsm, N3_bls_fsm,
-                              N1_bls_fsm1, N2_bls_fsm1,
-                              N1_bls_fsm2, N2_bls_fsm2,
-                              add_nFeature1, add_nFeature2)
+elif algo == 'VCFBLS':
+    ##
+    print("================== VCFBLS ===========================\n\n")
+    np.random.seed(seed)  # set the seed for generating random numbers
+    for j in range(0, epochs):
+        TrainingAccuracy, TestingAccuracy, Training_time, Testing_time, f_score, predicted \
+            = vcfbls_train_fscore(train_x, train_y, test_x, test_y, s, C,
+                                  N1_bls_fsm, N2_bls_fsm, N3_bls_fsm,
+                                  N1_bls_fsm1, N2_bls_fsm1,
+                                  N1_bls_fsm2, N2_bls_fsm2,
+                                  add_nFeature1, add_nFeature2)
 
-    train_err[0, j] = TrainingAccuracy * 100
-    test_err[0, j] = TestingAccuracy * 100
-    train_time[0, j] = Training_time
-    test_time[0, j] = Testing_time
+        train_err[0, j] = TrainingAccuracy * 100
+        test_err[0, j] = TestingAccuracy * 100
+        train_time[0, j] = Training_time
+        test_time[0, j] = Testing_time
 
-blsfsm_test_acc = TestingAccuracy
-blsfsm_test_f_score = f_score
-blsfsm_train_time = Training_time
-blsfsm_test_time = Testing_time
+    blsfsm_test_acc = TestingAccuracy
+    blsfsm_test_f_score = f_score
+    blsfsm_train_time = Training_time
+    blsfsm_test_time = Testing_time
 
-result = ['VCFBLS', str(blsfsm_test_acc * 100), str(blsfsm_test_f_score * 100), str(blsfsm_train_time)]
-result = np.asarray(result)
-# print('VCFBLS results -Accuracy (%), F-Score (%), Training time (s)-:', result)
-# np.savetxt('finalResult_VCFBLS.csv', result, delimiter=',', fmt='%s')
-accuracy = accuracy_score(test_y, predicted)
-fscore = f1_score(test_y, predicted)
-precision = precision_score(test_y, predicted)
-sensitivity = recall_score(test_y, predicted)
-tp, fn, fp, tn = confusion_matrix_cnl(test_y, predicted)
+    result = ['VCFBLS', str(blsfsm_test_acc * 100), str(blsfsm_test_f_score * 100), str(blsfsm_train_time)]
+    result = np.asarray(result)
+    # print('VCFBLS results -Accuracy (%), F-Score (%), Training time (s)-:', result)
+    # np.savetxt('finalResult_VCFBLS.csv', result, delimiter=',', fmt='%s')
+    accuracy = accuracy_score(test_y, predicted)
+    fscore = f1_score(test_y, predicted)
+    precision = precision_score(test_y, predicted)
+    sensitivity = recall_score(test_y, predicted)
+    tp, fn, fp, tn = confusion_matrix_cnl(test_y, predicted)
 
-head = ['VCFBLS', 'Accuracy', 'F-Score',
-        'Precision', 'Sensitivity', 'TP', 'FN', 'FP', 'TN', 'Training time']
-result_append = ['{}_{}_{}'.format('VCFBLS', 'p300', 'none'),
-                 '{:.6f}'.format(accuracy * 100), '{:.6f}'.format(fscore * 100),
-                 '{:.6f}'.format(precision * 100), '{:.6f}'.format(sensitivity * 100),
-                 '{}'.format(tp), '{}'.format(fn), '{}'.format(fp), '{}'.format(tn), '{}'.format(Training_time)]
+    head = ['VCFBLS', 'Accuracy', 'F-Score',
+            'Precision', 'Sensitivity', 'TP', 'FN', 'FP', 'TN', 'Training time']
+    result_append = ['{}_{}_{}'.format('VCFBLS', 'p300', 'none'),
+                     '{:.6f}'.format(accuracy * 100), '{:.6f}'.format(fscore * 100),
+                     '{:.6f}'.format(precision * 100), '{:.6f}'.format(sensitivity * 100),
+                     '{}'.format(tp), '{}'.format(fn), '{}'.format(fp), '{}'.format(tn), '{}'.format(Training_time)]
 
-result_save = np.asarray(result_append)
-result_save = result_save.reshape((1, len(result_save)))
-head = np.array(head)
-head = head.reshape((1, len(head)))
-result_save = np.concatenate((head, result_save), axis=0)
-# Save final results for each dataset
-np.savetxt('%s_results_%s.csv' % ('VCFBLS', 'p300'),
-           result_save, fmt='%s',
-           delimiter=',')
-print('------ Results have been saved to %s_results_%s.csv ------' % ('VCFBLS', 'p300'))
+    result_save = np.asarray(result_append)
+    result_save = result_save.reshape((1, len(result_save)))
+    head = np.array(head)
+    head = head.reshape((1, len(head)))
+    result_save = np.concatenate((head, result_save), axis=0)
+    # Save final results for each dataset
+    np.savetxt('%s_results_%s.csv' % ('VCFBLS', 'p300'),
+               result_save, fmt='%s',
+               delimiter=',')
+    print('------ Results have been saved to %s_results_%s.csv ------' % ('VCFBLS', 'p300'))
 
 print('------ Completed ------')
