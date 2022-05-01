@@ -4,7 +4,7 @@ import numpy as np
 VFBLS or VCFBLS
 """
 
-algo = 'VFBLS'  # 'VFBLS' or 'VCFBLS'
+algo = 'VCFBLS'  # 'VFBLS' or 'VCFBLS'
 
 # list1 = [20, 40, 100]
 # list2 = [10, 20]

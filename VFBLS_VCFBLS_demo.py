@@ -138,7 +138,7 @@ s = 0.8  # the shrinkage parameter for enhancement nodes
 # N2* - the groups of mapped features
 # N3* - the number of enhancement nodes
 
-algo = 'VFBLS'
+algo = 'VCFBLS'
 
 if algo == 'VFBLS':
     N1_bls_fsm = 100  # feature nodes of a group in the 1st set
@@ -152,8 +152,8 @@ if algo == 'VFBLS':
     N2_bls_fsm2 = 5  # feature groups in the 3rd set
 
 elif algo == 'VCFBLS':
-    N1_bls_fsm = 20  # feature nodes of a group in the 1st set
-    N2_bls_fsm = 10  # feature groups in the 1st set
+    N1_bls_fsm = 40  # feature nodes of a group in the 1st set
+    N2_bls_fsm = 20  # feature groups in the 1st set
     N3_bls_fsm = 50  # enhancement nodes
 
     N1_bls_fsm1 = 40  # feature nodes of a group in the 2nd set

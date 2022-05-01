@@ -118,7 +118,7 @@ C = 2 ** -15;
 s = 0.8;
 
 epochs = 1;
-algo = 'VFBLS'  # 'VFBLS' or 'VCFBLS'
+algo = 'VCFBLS'  # 'VFBLS' or 'VCFBLS'
 
 list1 = [20, 40, 100]
 list2 = [10, 20]
