@@ -81,4 +81,4 @@ result = [['Model', str(None), None],
 
 result = np.asarray(result)
 # print(result)
-np.savetxt('BestResult_acc_%s_p300.csv' % algo, result, delimiter=',', fmt=['%s', '%s', '%s'])
+np.savetxt('BestParam_acc_%s_p300.csv' % algo, result, delimiter=',', fmt=['%s', '%s', '%s'])
