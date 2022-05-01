@@ -32,7 +32,7 @@ import scipy.io
 import scipy.stats
 from scipy.stats import zscore
 from scipy import signal
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
@@ -151,11 +151,11 @@ if algo == 'VFBLS':
     N2_bls_fsm2 = 5  # feature groups in the 3rd set
 
 elif algo == 'VCFBLS':
-    N1_bls_fsm = 40  # feature nodes of a group in the 1st set
+    N1_bls_fsm = 20  # feature nodes of a group in the 1st set
     N2_bls_fsm = 10  # feature groups in the 1st set
     N3_bls_fsm = 50  # enhancement nodes
 
-    N1_bls_fsm1 = 20  # feature nodes of a group in the 2nd set
+    N1_bls_fsm1 = 40  # feature nodes of a group in the 2nd set
     N2_bls_fsm1 = 10  # feature groups in the 3rd set
 
     N1_bls_fsm2 = 20  # feature nodes of a group in the 3rd set
@@ -195,7 +195,7 @@ blsfsm_test_time = Testing_time
 
 result = ['VFBLS', str(blsfsm_test_acc * 100), str(blsfsm_test_f_score * 100), str(blsfsm_train_time)]
 result = np.asarray(result)
-print('VFBLS results -Accuracy (%), F-Score (%), Training time (s)-:', result)
+# print('VFBLS results -Accuracy (%), F-Score (%), Training time (s)-:', result)
 # np.savetxt('finalResult_VFBLS.csv', result, delimiter=',', fmt='%s')
 
 accuracy = accuracy_score(test_y, predicted)
@@ -245,7 +245,7 @@ blsfsm_test_time = Testing_time
 
 result = ['VCFBLS', str(blsfsm_test_acc * 100), str(blsfsm_test_f_score * 100), str(blsfsm_train_time)]
 result = np.asarray(result)
-print('VCFBLS results -Accuracy (%), F-Score (%), Training time (s)-:', result)
+# print('VCFBLS results -Accuracy (%), F-Score (%), Training time (s)-:', result)
 # np.savetxt('finalResult_VCFBLS.csv', result, delimiter=',', fmt='%s')
 accuracy = accuracy_score(test_y, predicted)
 fscore = f1_score(test_y, predicted)
